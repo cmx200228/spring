@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.imooc.imooc_mall.model.pojo.Category;
 import com.imooc.imooc_mall.model.request.AddCategoryRequest;
 import com.imooc.imooc_mall.model.vo.CategoryVO;
+import org.springframework.cache.annotation.Cacheable;
 
 import java.util.List;
 
@@ -20,5 +21,6 @@ public interface CategoryService {
 
     PageInfo<Category> listForAdmin(Integer pageNum, Integer pageSize);
 
-    List<CategoryVO> listCategoryForCustomer();
+    @Cacheable(value = "listCategoryForCustomer")
+    List<CategoryVO> listCategoryForCustomer(Integer parentId);
 }

@@ -1,6 +1,7 @@
 package com.imooc.imooc_mall.controller;
 
 import com.imooc.imooc_mall.common.ApiRestResponse;
+import com.imooc.imooc_mall.model.request.ProductListRequest;
 import com.imooc.imooc_mall.service.ProductService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,4 +27,9 @@ public class ProductController {
         return ApiRestResponse.success(productService.detail(id));
     }
 
+    @ApiOperation("商品列表")
+    @GetMapping("/product/list")
+    public ApiRestResponse listProduct(ProductListRequest productListRequest) {
+        return ApiRestResponse.success(productService.listForCustomer(productListRequest));
+    }
 }

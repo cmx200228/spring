@@ -178,4 +178,21 @@
       #{id}
     </foreach>
   </update>
+  <select id="selectList" resultMap="BaseResultMap" parameterType="com.imooc.imooc_mall.model.query.ProductListQuery">
+    SELECT <include refid="Base_Column_List"/>
+    FROM imooc_mall_product
+    <where>
+      <if test="query.keyword != null">
+        AND name LIKE #{query.keyword}
+      </if>
+      <if test="query.categoryIds != null">
+      AND category_id IN
+        <foreach collection="query.categoryIds" close=")" item="item" open="(" separator=",">
+          #{item}
+        </foreach>
+      </if>
+    AND imooc_mall_product.status = 1
+    </where>
+    ORDER BY create_time DESC
+  </select>
 </mapper>

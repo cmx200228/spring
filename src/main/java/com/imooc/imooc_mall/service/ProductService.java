@@ -3,6 +3,7 @@ package com.imooc.imooc_mall.service;
 import com.github.pagehelper.PageInfo;
 import com.imooc.imooc_mall.model.pojo.Product;
 import com.imooc.imooc_mall.model.request.AddProduct;
+import com.imooc.imooc_mall.model.request.ProductListRequest;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,4 +32,6 @@ public interface ProductService {
     PageInfo<Product> listForAdmin(Integer pageNum, Integer pageSize);
 
     Product detail(Integer id);
+
+    PageInfo<Product> listForCustomer(ProductListRequest productListRequest);
 }

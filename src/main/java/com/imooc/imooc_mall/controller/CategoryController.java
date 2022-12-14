@@ -88,6 +88,6 @@ public class CategoryController {
     @ApiOperation("前台目录列表")
     @PostMapping("/category/list")
     public ApiRestResponse<?> listCategoryCustomer() {
-        return ApiRestResponse.success(categoryService.listCategoryForCustomer());
+        return ApiRestResponse.success(categoryService.listCategoryForCustomer(0));
     }
 }
