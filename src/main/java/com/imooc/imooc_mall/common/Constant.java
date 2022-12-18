@@ -1,5 +1,6 @@
 package com.imooc.imooc_mall.common;
 
+import io.lettuce.core.internal.LettuceSets;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -22,7 +23,7 @@ public class Constant {
     }
 
     public interface ProductListOrderBy {
-        Set<String> PRICE_ASC_DESC = Set.of("price desc", "price asc");
+        Set<String> PRICE_ASC_DESC = LettuceSets.newHashSet("price desc", "price asc");
     }
 
 }

@@ -179,7 +179,7 @@ public class ProductServiceImpl implements ProductService {
         //构建query对象
         ProductListQuery productListQuery = new ProductListQuery();
         //搜索处理
-        if (!StringUtils.hasText(productListRequest.getKeyword())) {
+        if (StringUtils.hasText(productListRequest.getKeyword())) {
             productListQuery.setKeyword(new StringBuilder().append("%")
                     .append(productListRequest.getKeyword()).append("%").toString());
         }
