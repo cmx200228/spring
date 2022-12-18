@@ -18,7 +18,7 @@ public class Constant {
     public static String FILE_UPLOAD_DIR;
 
     @Value("${file.upload.dir}")
-    public void setFileUploadDir(String fileUploadDir) {
+    public static void setFileUploadDir(String fileUploadDir) {
         FILE_UPLOAD_DIR = fileUploadDir;
     }
 
@@ -26,4 +26,17 @@ public class Constant {
         Set<String> PRICE_ASC_DESC = LettuceSets.newHashSet("price desc", "price asc");
     }
 
+    public interface SaleStatus {
+        //商品下架状态
+        int NOT_SALE = 0;
+        //商品上架状态
+        int SALE = 1;
+    }
+
+    public interface Cart {
+        //未选中状态
+        int UN_CHECKED = 0;
+        //选中状态
+        int CHECKED = 1;
+    }
 }

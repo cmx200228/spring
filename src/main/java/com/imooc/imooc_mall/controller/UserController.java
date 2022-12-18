@@ -6,6 +6,7 @@ import com.imooc.imooc_mall.exception.ImoocMallException;
 import com.imooc.imooc_mall.exception.ImoocMallExceptionEnum;
 import com.imooc.imooc_mall.model.pojo.User;
 import com.imooc.imooc_mall.service.UserService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,6 +40,7 @@ public class UserController {
      * @param password 密码
      * @return 通用返回对象
      */
+    @ApiOperation("用户注册")
     @PostMapping("/register")
     @ResponseBody
     public ApiRestResponse register(@RequestParam("username") String username, @RequestParam("password") String password) throws ImoocMallException {
@@ -56,6 +58,7 @@ public class UserController {
         return ApiRestResponse.success();
     }
 
+    @ApiOperation("用户登录")
     @PostMapping("/login")
     @ResponseBody
     public ApiRestResponse login(@RequestParam("username") String username,
@@ -83,6 +86,7 @@ public class UserController {
      * @return 统一返回对象
      * @throws ImoocMallException 用户未登录异常
      */
+    @ApiOperation("更新用户签名")
     @PostMapping("/user/update")
     @ResponseBody
     public ApiRestResponse updateUserInfo(HttpSession session, @RequestParam String signature) throws ImoocMallException {
@@ -102,6 +106,7 @@ public class UserController {
      * @param session 当前会话
      * @return 统一返回对象
      */
+    @ApiOperation("退出登录")
     @PostMapping("/user/logout")
     @ResponseBody
     public ApiRestResponse logout(HttpSession session) {
@@ -117,6 +122,7 @@ public class UserController {
      * @return 统一返回接口
      * @throws ImoocMallException 可能存在的异常情况
      */
+    @ApiOperation("管理员登录")
     @PostMapping("/adminLogin")
     @ResponseBody
     public ApiRestResponse adminLogin(@RequestParam("username") String username,
