@@ -1,5 +1,7 @@
 package com.imooc.imooc_mall.common;
 
+import com.imooc.imooc_mall.exception.ImoocMallException;
+import com.imooc.imooc_mall.exception.ImoocMallExceptionEnum;
 import io.lettuce.core.internal.LettuceSets;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -38,5 +40,42 @@ public class Constant {
         int UN_CHECKED = 0;
         //选中状态
         int CHECKED = 1;
+    }
+
+    /**
+     * 订单状态
+     */
+    public enum OrderStatusEum {
+        CANCELED(0, "已取消"),
+        NO_PAY(10, "未付款"),
+        PAID(20, "已付款"),
+        SHIPPED(40, "已发货"),
+        ORDER_SUCCESS(50, "订单完成"),
+        ORDER_CLOSE(60, "订单关闭");
+
+        Integer code;
+        String value;
+
+        OrderStatusEum(Integer code, String value) {
+            this.code = code;
+            this.value = value;
+        }
+
+        public static OrderStatusEum codeOf(Integer code) {
+            for (OrderStatusEum orderStatusEum : values()) {
+                if (orderStatusEum.getCode().equals(code)) {
+                    return orderStatusEum;
+                }
+            }
+            throw new ImoocMallException(ImoocMallExceptionEnum.NO_ENUM);
+        }
+
+        public Integer getCode() {
+            return code;
+        }
+
+        public String getValue() {
+            return value;
+        }
     }
 }

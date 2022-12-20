@@ -57,7 +57,7 @@ public class CartServiceImpl implements CartService {
             cartNew.setSelected(Constant.Cart.CHECKED);
             cartMapper.updateByPrimaryKeySelective(cartNew);
         }
-        return null;
+        return this.list(userId);
     }
 
     private void validProduct(Integer productId, Integer count) {
@@ -71,5 +71,91 @@ public class CartServiceImpl implements CartService {
         if (count > product.getStock()) {
             throw new ImoocMallException(ImoocMallExceptionEnum.NOT_ENOUGH);
         }
+    }
+
+
+    /**
+     * 显示购物车
+     *
+     * @param userId 用户id
+     * @return 前端显示的购物车对象
+     */
+    @Override
+    public List<CartVO> list(Integer userId) {
+        List<CartVO> cartVOS = cartMapper.selectList(userId);
+        cartVOS.forEach(cartVO -> cartVO.setTotalPrice(cartVO.getPrice() * cartVO.getQuantity()));
+        return cartVOS;
+    }
+
+    @Override
+    public List<CartVO> update(Integer userId, Integer productId, Integer count) {
+        validProduct(productId, count);
+        Cart cart = cartMapper.selectByUserIdAndProductId(userId, productId);
+        if (cart == null) {
+            //这个商品不在购物车里，需要抛出异常
+            throw new ImoocMallException(ImoocMallExceptionEnum.UPDATE_FAILED);
+        } else {
+            //这个商品已经在购物车里了，直接更新数量
+            Cart cartNew = new Cart();
+            cartNew.setQuantity(count);
+            cartNew.setId(cart.getId());
+            cartNew.setProductId(cart.getProductId());
+            cartNew.setUserId(cart.getUserId());
+            cartNew.setSelected(Constant.Cart.CHECKED);
+            cartMapper.updateByPrimaryKeySelective(cartNew);
+        }
+        return this.list(userId);
+    }
+
+    /**
+     * 删除购物车
+     *
+     * @param userId    用户id
+     * @param productId 商品id
+     * @return 前端显示的购物车对象
+     */
+    @Override
+    public List<CartVO> delete(Integer userId, Integer productId) {
+        Cart cart = cartMapper.selectByUserIdAndProductId(userId, productId);
+        if (cart == null) {
+            //这个商品不在购物车里，无法删除，需要抛出异常
+            throw new ImoocMallException(ImoocMallExceptionEnum.DELETE_FAILED);
+        } else {
+            //这个商品已经在购物车里了，直接删除
+            cartMapper.deleteByPrimaryKey(cart.getId());
+        }
+        return this.list(userId);    }
+
+    /**
+     * 选中/不选中购物车某件商品
+     *
+     * @param userId    用户id
+     * @param productId 商品id
+     * @param selected  选中状态
+     * @return 前端显示的购物车对象
+     */
+    @Override
+    public List<CartVO> selectOrNot(Integer userId, Integer productId, Integer selected) {
+        Cart cart = cartMapper.selectByUserIdAndProductId(userId, productId);
+        if (cart == null) {
+            //这个商品不在购物车里，无法选中，需要抛出异常
+            throw new ImoocMallException(ImoocMallExceptionEnum.UPDATE_FAILED);
+        } else {
+            //这个商品已经在购物车里了，可以选择
+            cartMapper.selectOrNot(userId, productId, selected);
+        }
+        return this.list(userId);
+    }
+
+    /**
+     * 购物车全选/全不选
+     * @param userId 用户id
+     * @param selected 选中状态
+     * @return 前端显示的购物车对象
+     */
+    @Override
+    public List<CartVO> selectAllOrNot(Integer userId, Integer selected) {
+        cartMapper.selectOrNot(userId, null, selected);
+        return this.list(userId);
     }
 }

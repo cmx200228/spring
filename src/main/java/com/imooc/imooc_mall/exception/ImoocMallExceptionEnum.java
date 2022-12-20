@@ -28,6 +28,8 @@ public enum ImoocMallExceptionEnum {
     UPLOAD_FAILED(10015 , "图片上传失败"),
     NOT_SALE(10016 , "商品状态不可售"),
     NOT_ENOUGH(10017 , "商品库存不足"),
+    CART_EMPTY(10018 , "购物车已勾选商品为空"),
+    NO_ENUM(10019 , "未找到对应的枚举"),
     NOT_FOND(11001 , "不存在该记录"),
 
 
