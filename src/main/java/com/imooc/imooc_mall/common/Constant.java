@@ -20,7 +20,7 @@ public class Constant {
     public static String FILE_UPLOAD_DIR;
 
     @Value("${file.upload.dir}")
-    public static void setFileUploadDir(String fileUploadDir) {
+    public void setFileUploadDir(String fileUploadDir) {
         FILE_UPLOAD_DIR = fileUploadDir;
     }
 

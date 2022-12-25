@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="fatal">
   <Properties>
-    <Property name="baseDir" value="F:\springBoot\imooc_mall\logs"/>
+    <Property name="baseDir" value="/root/logs"/>
   </Properties>
 
   <Appenders>

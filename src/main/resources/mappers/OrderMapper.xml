@@ -19,12 +19,12 @@
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, order_no, user_id, total_price, receiver_name, receiver_mobile, receiver_address, 
-    order_status, postage, payment_type, delivery_time, pay_time, end_time, create_time, 
+    id, order_no, user_id, total_price, receiver_name, receiver_mobile, receiver_address,
+    order_status, postage, payment_type, delivery_time, pay_time, end_time, create_time,
     update_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from imooc_mall_order
     where id = #{id,jdbcType=INTEGER}
@@ -34,16 +34,16 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.imooc.imooc_mall.model.pojo.Order">
-    insert into imooc_mall_order (id, order_no, user_id, 
-      total_price, receiver_name, receiver_mobile, 
-      receiver_address, order_status, postage, 
-      payment_type, delivery_time, pay_time, 
+    insert into imooc_mall_order (id, order_no, user_id,
+      total_price, receiver_name, receiver_mobile,
+      receiver_address, order_status, postage,
+      payment_type, delivery_time, pay_time,
       end_time, create_time, update_time
       )
-    values (#{id,jdbcType=INTEGER}, #{orderNo,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, 
-      #{totalPrice,jdbcType=INTEGER}, #{receiverName,jdbcType=VARCHAR}, #{receiverMobile,jdbcType=VARCHAR}, 
-      #{receiverAddress,jdbcType=VARCHAR}, #{orderStatus,jdbcType=INTEGER}, #{postage,jdbcType=INTEGER}, 
-      #{paymentType,jdbcType=INTEGER}, #{deliveryTime,jdbcType=TIMESTAMP}, #{payTime,jdbcType=TIMESTAMP}, 
+    values (#{id,jdbcType=INTEGER}, #{orderNo,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER},
+      #{totalPrice,jdbcType=INTEGER}, #{receiverName,jdbcType=VARCHAR}, #{receiverMobile,jdbcType=VARCHAR},
+      #{receiverAddress,jdbcType=VARCHAR}, #{orderStatus,jdbcType=INTEGER}, #{postage,jdbcType=INTEGER},
+      #{paymentType,jdbcType=INTEGER}, #{deliveryTime,jdbcType=TIMESTAMP}, #{payTime,jdbcType=TIMESTAMP},
       #{endTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
       )
   </insert>
@@ -210,4 +210,26 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="selectByOrderNo" parameterType="string" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from imooc_mall_order
+    where order_no = #{orderNo}
+  </select>
+
+  <select id="selectByUserId" parameterType="integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from imooc_mall_order
+    where user_id = #{userId}
+    ORDER BY create_time DESC
+  </select>
+
+  <select id="selectAllForAdmin"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from imooc_mall_order
+    ORDER BY create_time DESC
+  </select>
 </mapper>

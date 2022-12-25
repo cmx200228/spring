@@ -150,4 +150,10 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="selectByOrderNo" parameterType="string" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List" />
+    FROM imooc_mall_order_item
+    WHERE order_no = #{orderNo}
+    </select>
 </mapper>

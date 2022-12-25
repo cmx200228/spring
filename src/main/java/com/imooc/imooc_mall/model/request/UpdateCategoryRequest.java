@@ -64,4 +64,15 @@ public class UpdateCategoryRequest {
     public void setId(Integer id) {
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return "UpdateCategoryRequest{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", type=" + type +
+                ", parentId=" + parentId +
+                ", orderNum=" + orderNum +
+                '}';
+    }
 }

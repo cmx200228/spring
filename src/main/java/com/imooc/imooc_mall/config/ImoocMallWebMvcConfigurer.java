@@ -23,6 +23,8 @@ public class ImoocMallWebMvcConfigurer implements WebMvcConfigurer {
 
         registry.addResourceHandler("/images/**").addResourceLocations("file:"
                 + Constant.FILE_UPLOAD_DIR);
+
+        registry.addResourceHandler("/admin/**").addResourceLocations("classpath:/static/admin/");
     }
 
     @Override

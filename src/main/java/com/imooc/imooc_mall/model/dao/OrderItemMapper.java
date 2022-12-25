@@ -3,6 +3,8 @@ package com.imooc.imooc_mall.model.dao;
 import com.imooc.imooc_mall.model.pojo.OrderItem;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  *
  * @author 陈蒙欣
@@ -21,4 +23,6 @@ public interface OrderItemMapper {
     int updateByPrimaryKeySelective(OrderItem row);
 
     int updateByPrimaryKey(OrderItem row);
+
+    List<OrderItem> selectByOrderNo(String orderNo);
 }

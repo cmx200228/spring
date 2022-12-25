@@ -57,4 +57,14 @@ public class AddCategoryRequest {
     public void setOrderNum(Integer orderNum) {
         this.orderNum = orderNum;
     }
+
+    @Override
+    public String toString() {
+        return "AddCategoryRequest{" +
+                "name='" + name + '\'' +
+                ", type=" + type +
+                ", parentId=" + parentId +
+                ", orderNum=" + orderNum +
+                '}';
+    }
 }

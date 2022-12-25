@@ -57,4 +57,15 @@ public class ProductListRequest {
     public void setPageSize(Integer pageSize) {
         this.pageSize = pageSize;
     }
+
+    @Override
+    public String toString() {
+        return "ProductListRequest{" +
+                "keyword='" + keyword + '\'' +
+                ", categoryId=" + categoryId +
+                ", orderBy='" + orderBy + '\'' +
+                ", pageNum=" + pageNum +
+                ", pageSize=" + pageSize +
+                '}';
+    }
 }
